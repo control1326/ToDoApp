@@ -1,0 +1,65 @@
+﻿@using ToDo.ViewModels
+@model IEnumerable<ToDoListVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <div class="header">
+        <div id="Date"></div>
+    </div>
+    <p>
+        <a asp-action="Create" class="btn btn-success mt-3">Add New To-Do</a>
+    </p>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Assigned To</th>
+                <th>Complete</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Content
+                </td>
+                <td>
+                        @Html.DropDownListFor(m => item.UserID, item.UserList, "Please select", new { @class = "form-control", @disabled="disabled" })
+                </td>
+                <td>
+                        <input type="checkbox" asp-for=@item.IsComplete disabled="disabled" />
+                </td>
+                <td>
+                    <a asp-action="Edit" class="btn btn-info" asp-route-id="@item.Id" >Edit</a>
+                </td>
+                <td>
+                    <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        
+        }
+
+        </tbody>
+
+    </table>
+
+
+
+
+
+</div>
+
+@section scripts {
+    <script>
+        const dateElement = document.getElementById("Date");
+        const options = {weekday: 'long', month: 'short', day: 'numeric'};
+        const today = new Date();
+        dateElement.innerHTML = today.toLocaleDateString("en-Us", options);
+    </script>
+}
