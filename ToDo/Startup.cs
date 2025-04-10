@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
 using ToDo.Models;
+using ToDo.Services;
 
 
 namespace ToDo
@@ -62,6 +63,8 @@ namespace ToDo
                 {
                     options.SerializerSettings.ContractResolver = new DefaultContractResolver();
                 });
+
+            services.AddTransient<IMaths, MathService>();
 
         }
 
