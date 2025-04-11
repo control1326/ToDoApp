@@ -18,19 +18,21 @@ namespace ToDo.Controllers
         {
             var toDoList = await _context.ToDoLists.ToListAsync();
 
+            var userList = new SelectList(_context.Users.ToList(), "UserID", "UserName");
+
             IEnumerable<ToDoListVM> vms = (from t in toDoList select
                                           new ToDoListVM()
                                           {
                                               Id = t.Id,
                                               Content = t.Content,
                                               UserID = t.UserID,
-                                              UserList = new SelectList(_context.Users.ToList(), "UserID", "UserName"),
+                                              UserList = userList,
                                               IsComplete = t.IsComplete
                                               
                                           }).ToList();
-                
-            
-            
+
+            ViewBag.UserList = userList;
+
 
             return View(vms);
         }

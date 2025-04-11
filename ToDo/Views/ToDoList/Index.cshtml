@@ -9,9 +9,20 @@
     <div class="header">
         <div id="Date"></div>
     </div>
-    <p>
-        <a asp-action="Create" class="btn btn-success mt-3">Add New To-Do</a>
-    </p>
+    <div class="row">
+        <div class="col-md-8">
+            <p >
+                <a asp-action="Create" class="btn btn-success mt-3" >Add New To-Do</a>
+            </p>
+        </div>
+        <div class="col-md-2" style="text-align:right">            
+                <label  class="control-label mt-3 " >Filter By User:</label>
+         </div>
+         <div class="col-md-2 ">
+                @Html.DropDownList("UserIDFilter", (SelectList)ViewBag.UserList, "Please select", new { @class = "form-control mt-3",  })
+        </div>
+    </div>
+    <div class="row">
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -49,7 +60,7 @@
 
     </table>
 
-
+    </div>
 
 
 
